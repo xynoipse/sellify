@@ -1,19 +1,18 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, TextProps } from 'react-native';
+import { Text, TextProps } from 'react-native';
 
-function AppText({ children, style }: TextProps) {
+import tw from '@/lib/tailwind';
+
+const AppText: React.FC<TextProps> = (props) => {
   return (
-    <Text style={[styles.text, style]}>
-      {children}
-    </Text>
-  );
+    <Text
+      {...props}
+      style={{
+        ...tw`text-base font-normal text-black`,
+        ...props.style as object
+      }}
+    />
+  )
 }
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 18, 
-    fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Avenir',
-  }
-})
 
 export default AppText;

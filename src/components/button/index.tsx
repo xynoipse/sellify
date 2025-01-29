@@ -1,41 +1,31 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
-import { colors } from '@/constants/colors';
+import tw from '@/lib/tailwind';
 
 interface Props {
   children?: React.ReactNode;
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'danger';
   onPress: () => void;
 }
 
 const AppButton: React.FC<Props> = ({ children, variant = 'primary', onPress }) => {
   return (
     <TouchableOpacity 
-      style={[styles.button, { backgroundColor: colors[variant] }]} 
+      style={{
+        ...tw`rounded-full items-center justify-center p-4 my-1.5 w-full`,
+        ...(variant === 'primary' && tw`bg-primary`),
+        ...(variant === 'secondary' && tw`bg-secondary`),
+        ...(variant === 'danger' && tw`bg-danger`),
+      }} 
       onPress={onPress}
       activeOpacity={0.7}
     >
-      <Text style={styles.text}>{children}</Text>
+      <Text style={tw`text-white text-lg font-bold uppercase`}>
+        {children}
+      </Text>
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 15,
-    width: '100%',
-    marginVertical: 5,
-  },
-  text: {
-    color: colors.white,
-    fontSize: 18,
-    textTransform: 'uppercase',
-    fontWeight: 'bold',
-  },
-})
 
 export default AppButton;

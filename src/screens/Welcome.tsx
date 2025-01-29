@@ -1,24 +1,27 @@
 import React from 'react';
-import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { Image, ImageBackground, View } from 'react-native';
 
 import AppButton from '@/components/button';
-import { colors } from '@/constants/colors';
+import AppText from '@/components/text';
+import tw from '@/lib/tailwind';
 
 function Welcome() {
   return (
     <ImageBackground 
-      style={styles.background}
+      style={tw`flex-1 justify-end items-center`}
       source={require('../assets/background.jpg')}
       blurRadius={10}
     >
-      <View style={styles.logoContainer}>
+      <View style={tw`absolute top-[70px] items-center`}>
         <Image 
-          style={styles.logo}
+          style={tw`w-36 h-36`}
           source={require('../assets/logo.png')} 
         />
-        <Text style={styles.tagline}>Sell and Simplify</Text>
+        <AppText style={tw`text-white text-[25px] py-3 font-bold`}>
+          Sell and Simplify
+        </AppText>
       </View>
-      <View style={styles.actionsContainer}>
+      <View style={tw`w-full p-5`}>
         <AppButton 
           onPress={() => null}
         >
@@ -34,32 +37,5 @@ function Welcome() {
     </ImageBackground>
   );
 }
-
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  logoContainer: {
-    position: 'absolute',
-    top: 70,
-    alignItems: 'center',
-  },
-  tagline: {
-    color: colors.white,
-    fontSize: 25,
-    fontWeight: '600',
-    paddingVertical: 20,
-  },
-  logo: {
-    width: 135,
-    height: 135,
-  },
-  actionsContainer: {
-    padding: 20,
-    width: '100%',
-  },
-});
 
 export default Welcome;
